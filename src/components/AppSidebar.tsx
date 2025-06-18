@@ -10,7 +10,8 @@ import {
   CreditCard,
   Tag,
   TrendingUp,
-  Globe
+  Globe,
+  Menu
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import {
@@ -45,7 +46,8 @@ const systemItems = [
 ];
 
 export function AppSidebar() {
-  const { collapsed } = useSidebar();
+  const { state } = useSidebar();
+  const isCollapsed = state === 'collapsed';
 
   const getNavClass = (isActive: boolean) =>
     `w-full justify-start transition-colors ${
@@ -55,26 +57,28 @@ export function AppSidebar() {
     }`;
 
   return (
-    <Sidebar className={`border-r bg-white ${collapsed ? 'w-16' : 'w-64'}`}>
+    <Sidebar className={`border-r bg-white ${isCollapsed ? 'w-16' : 'w-64'}`}>
       <div className="p-4 border-b">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
             <Globe className="w-5 h-5 text-white" />
           </div>
-          {!collapsed && (
+          {!isCollapsed && (
             <div>
               <h2 className="font-semibold text-gray-900">Flup</h2>
               <p className="text-xs text-gray-500">Admin Manager</p>
             </div>
           )}
         </div>
-        <SidebarTrigger className="mt-4 ml-auto" />
+        <div className="mt-4 flex justify-center">
+          <SidebarTrigger />
+        </div>
       </div>
 
       <SidebarContent className="px-2">
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs font-medium text-gray-500 uppercase tracking-wider px-2 py-2">
-            Marketing
+            {!isCollapsed ? 'Marketing' : ''}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -84,9 +88,10 @@ export function AppSidebar() {
                     <NavLink 
                       to={item.url} 
                       className={({ isActive }) => getNavClass(isActive)}
+                      title={isCollapsed ? item.title : undefined}
                     >
-                      <item.icon className="w-5 h-5" />
-                      {!collapsed && <span className="ml-3">{item.title}</span>}
+                      <item.icon className="w-5 h-5 flex-shrink-0" />
+                      {!isCollapsed && <span className="ml-3">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -97,7 +102,7 @@ export function AppSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs font-medium text-gray-500 uppercase tracking-wider px-2 py-2">
-            Payments
+            {!isCollapsed ? 'Payments' : ''}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -107,9 +112,10 @@ export function AppSidebar() {
                     <NavLink 
                       to={item.url} 
                       className={({ isActive }) => getNavClass(isActive)}
+                      title={isCollapsed ? item.title : undefined}
                     >
-                      <item.icon className="w-5 h-5" />
-                      {!collapsed && <span className="ml-3">{item.title}</span>}
+                      <item.icon className="w-5 h-5 flex-shrink-0" />
+                      {!isCollapsed && <span className="ml-3">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -120,7 +126,7 @@ export function AppSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs font-medium text-gray-500 uppercase tracking-wider px-2 py-2">
-            System
+            {!isCollapsed ? 'System' : ''}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -130,9 +136,10 @@ export function AppSidebar() {
                     <NavLink 
                       to={item.url} 
                       className={({ isActive }) => getNavClass(isActive)}
+                      title={isCollapsed ? item.title : undefined}
                     >
-                      <item.icon className="w-5 h-5" />
-                      {!collapsed && <span className="ml-3">{item.title}</span>}
+                      <item.icon className="w-5 h-5 flex-shrink-0" />
+                      {!isCollapsed && <span className="ml-3">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -144,10 +151,10 @@ export function AppSidebar() {
 
       <div className="p-4 border-t mt-auto">
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+          <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
             <Users className="w-4 h-4 text-gray-600" />
           </div>
-          {!collapsed && (
+          {!isCollapsed && (
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-gray-900 truncate">Harper Nelson</p>
               <p className="text-xs text-gray-500 truncate">Admin Manager</p>

@@ -1,14 +1,18 @@
 
 import React from 'react';
 import { Clock, Plus } from 'lucide-react';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export function DashboardHeader() {
   return (
     <header className="bg-white border-b px-6 py-4">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-500 mt-1">Welcome back, Harper!</p>
+        <div className="flex items-center space-x-4">
+          <SidebarTrigger />
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+            <p className="text-gray-500 mt-1">Welcome back, Harper!</p>
+          </div>
         </div>
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2 text-sm text-gray-500">
